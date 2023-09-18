@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EMI Calculator</title>
+</head>
+<body>
+    <h1>EMI Calculator</h1>
+    
+    <label for="principal">Loan Principal Amount:</label>
+    <input type="number" id="principal" placeholder="Loan Principal Amount">
+    
+    <label for="interest">Annual Interest Rate (%):</label>
+    <input type="number" id="interest" placeholder="Annual Interest Rate">
+    
+    <label for="tenure">Loan Tenure (months):</label>
+    <input type="number" id="tenure" placeholder="Loan Tenure in months">
+    
+    <button id="calculateButton">Calculate EMI</button>
+    
+    <p id="result"></p>
+    
+    <script>
+        function calculateEMI() {
+            const principal = parseFloat(document.getElementById("principal").value);
+            const interest = parseFloat(document.getElementById("interest").value);
+            const tenure = parseFloat(document.getElementById("tenure").value);
+            
+            if (!isNaN(principal) && !isNaN(interest) && !isNaN(tenure)) {
+                const monthlyInterest = (interest / 12) / 100;
+                const emi = (principal * monthlyInterest * Math.pow(1 + monthlyInterest, tenure)) / (Math.pow(1 + monthlyInterest, tenure) - 1);
+                document.getElementById("result").textContent = `Your Monthly EMI: ${emi.toFixed(2)} `;
+            } else {
+                document.getElementById("result").textContent = "Please enter valid numbers.";
+            }
+        }
+        
+        const calculateButton = document.getElementById("calculateButton");
+        calculateButton.addEventListener("click", calculateEMI);
+    </script>
+</body>
+</html>
